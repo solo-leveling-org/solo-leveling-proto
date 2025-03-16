@@ -8,7 +8,8 @@ option java_outer_classname = "UserProto";
 
 service UserService {
   rpc getUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
-  rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+  rpc saveUser (SaveUserRequest) returns (SaveUserResponse);
+  rpc getUserTasks (GetUserTasksRequest) returns (GetUserTasksResponse);
 }
 
 message GetUserInfoRequest {
@@ -41,4 +42,22 @@ message SaveUserRequest {
 
 message SaveUserResponse {
   bool success = 1;
+}
+
+message GetUserTasksRequest {
+  int64 id = 1;
+}
+
+message UserTasks {
+  int64 id = 1;
+  repeated string currentTasks = 2;
+  repeated string completedTasks = 3;
+  repeated string skippedTasks = 4;
+  repeated string taskTopics = 5;
+  int32 maxTasks = 6;
+}
+
+message GetUserTasksResponse {
+  UserTasks userTasks = 1;
+  bool success = 2;
 }
