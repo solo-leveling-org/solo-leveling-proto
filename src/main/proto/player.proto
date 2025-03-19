@@ -1,36 +1,19 @@
 syntax = "proto3";
 
-package com.sleepkqq.sololeveling.proto.usertask;
+package com.sleepkqq.sololeveling.proto.player;
 
 import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
-option java_package = "com.sleepkqq.sololeveling.proto.usertask";
-option java_outer_classname = "UserProto";
+option java_package = "com.sleepkqq.sololeveling.proto.player";
+option java_outer_classname = "PlayerProto";
 
-service UserService {
-  rpc getUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
-  rpc authUser (AuthUserRequest) returns (AuthUserResponse);
+service PlayerService {
   rpc getPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
   rpc getCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
 }
 
 // models
-enum UserRole {
-  USER = 0;
-  ADMIN = 1;
-}
-
-message UserInfo {
-  int64 id = 1;
-  string username = 2;
-  string firstName = 3;
-  string lastName = 4;
-  string photoUrl = 5;
-  string locale = 6;
-  repeated UserRole role = 7;
-}
-
 enum TaskRarity {
   COMMON = 0;
   UNCOMMON = 1;
@@ -64,10 +47,38 @@ message TaskInfo {
   int32 intelligence = 9;
 }
 
+message LevelInfo {
+  string id = 1;
+  int32 level = 2;
+  int32 totalExperience = 3;
+  int32 currentExperience = 4;
+  int32 experienceToNextLevel = 5;
+  double coefficient = 6;
+}
+
+enum Assessment {
+  S = 0;
+  A = 1;
+  B = 2;
+  C = 3;
+  D = 4;
+  E = 5;
+}
+
+message PlayerTaskTopicInfo {
+  string id = 1;
+  repeated TaskTopic taskTopic = 2;
+  Assessment assessment = 3;
+  int32 completedTasksCount = 4;
+  int32 skippedTasksCount = 5;
+  LevelInfo levelInfo = 6;
+}
+
 message PlayerInfo {
   int64 id = 1;
   int32 maxTasks = 2;
-  repeated TaskTopic taskTopic = 3;
+  LevelInfo levelInfo = 3;
+  repeated PlayerTaskTopicInfo playerTaskTopicInfo = 4;
 }
 
 enum PlayerTaskStatus {
@@ -87,23 +98,6 @@ message PlayerTaskInfo {
 }
 
 // requests and responses
-message GetUserInfoRequest {
-  int64 userId = 1;
-}
-
-message GetUserInfoResponse {
-  UserInfo userInfo = 1;
-  bool success = 2;
-}
-
-message AuthUserRequest {
-  UserInfo userInfo = 1;
-}
-
-message AuthUserResponse {
-  bool success = 1;
-}
-
 message GetPlayerInfoRequest {
   int64 playerId = 1;
 }
