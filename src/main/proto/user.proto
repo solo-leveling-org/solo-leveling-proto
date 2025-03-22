@@ -2,15 +2,13 @@ syntax = "proto3";
 
 package com.sleepkqq.sololeveling.proto.user;
 
-import "google/protobuf/timestamp.proto";
-
 option java_multiple_files = true;
 option java_package = "com.sleepkqq.sololeveling.proto.user";
 option java_outer_classname = "UserProto";
 
 service UserService {
-  rpc getUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
-  rpc authUser (AuthUserRequest) returns (AuthUserResponse);
+  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc AuthUser (AuthUserRequest) returns (AuthUserResponse);
 }
 
 // models
@@ -22,25 +20,25 @@ enum UserRole {
 message UserInfo {
   int64 id = 1;
   string username = 2;
-  string firstName = 3;
-  string lastName = 4;
-  string photoUrl = 5;
+  string first_name = 3;
+  string last_name = 4;
+  string photo_url = 5;
   string locale = 6;
   repeated UserRole role = 7;
 }
 
 // requests and responses
 message GetUserInfoRequest {
-  int64 userId = 1;
+  int64 user_id = 1;
 }
 
 message GetUserInfoResponse {
-  UserInfo userInfo = 1;
+  UserInfo user_info = 1;
   bool success = 2;
 }
 
 message AuthUserRequest {
-  UserInfo userInfo = 1;
+  UserInfo user_info = 1;
 }
 
 message AuthUserResponse {

@@ -9,8 +9,8 @@ option java_package = "com.sleepkqq.sololeveling.proto.player";
 option java_outer_classname = "PlayerProto";
 
 service PlayerService {
-  rpc getPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
-  rpc getCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
+  rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
+  rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
 }
 
 // models
@@ -50,9 +50,9 @@ message TaskInfo {
 message LevelInfo {
   string id = 1;
   int32 level = 2;
-  int32 totalExperience = 3;
-  int32 currentExperience = 4;
-  int32 experienceToNextLevel = 5;
+  int32 total_experience = 3;
+  int32 current_experience = 4;
+  int32 experience_to_next_level = 5;
   double coefficient = 6;
 }
 
@@ -67,18 +67,18 @@ enum Assessment {
 
 message PlayerTaskTopicInfo {
   string id = 1;
-  repeated TaskTopic taskTopic = 2;
+  TaskTopic task_topic = 2;
   Assessment assessment = 3;
-  int32 completedTasksCount = 4;
-  int32 skippedTasksCount = 5;
-  LevelInfo levelInfo = 6;
+  int32 completed_tasks_count = 4;
+  int32 skipped_tasks_count = 5;
+  LevelInfo level_info = 6;
 }
 
 message PlayerInfo {
   int64 id = 1;
-  int32 maxTasks = 2;
-  LevelInfo levelInfo = 3;
-  repeated PlayerTaskTopicInfo playerTaskTopicInfo = 4;
+  int32 max_tasks = 2;
+  LevelInfo level_info = 3;
+  repeated PlayerTaskTopicInfo player_task_topic_info = 4;
 }
 
 enum PlayerTaskStatus {
@@ -91,27 +91,27 @@ enum PlayerTaskStatus {
 
 message PlayerTaskInfo {
   string id = 1;
-  TaskInfo taskInfo = 2;
+  TaskInfo task_info = 2;
   PlayerTaskStatus status = 3;
-  google.protobuf.Timestamp createdAt = 4;
-  google.protobuf.Timestamp closedAt = 5;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp closed_at = 5;
 }
 
 // requests and responses
 message GetPlayerInfoRequest {
-  int64 playerId = 1;
+  int64 player_id = 1;
 }
 
 message GetPlayerInfoResponse {
-  PlayerInfo playerInfo = 1;
+  PlayerInfo player_info = 1;
   bool success = 2;
 }
 
 message GetCurrentTasksRequest {
-  int64 playerId = 1;
+  int64 player_id = 1;
 }
 
 message GetCurrentTasksResponse {
-  repeated PlayerTaskInfo currentTask = 1;
+  repeated PlayerTaskInfo current_task = 1;
   bool success = 2;
 }
