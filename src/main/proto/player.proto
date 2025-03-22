@@ -11,6 +11,8 @@ option java_outer_classname = "PlayerProto";
 service PlayerService {
   rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
   rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
+  rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (SavePlayerTopicsResponse);
+  rpc GenerateTasks (GenerateTasksRequest) returns (GenerateTasksResponse);
 }
 
 // models
@@ -53,7 +55,6 @@ message LevelInfo {
   int32 total_experience = 3;
   int32 current_experience = 4;
   int32 experience_to_next_level = 5;
-  double coefficient = 6;
 }
 
 enum Assessment {
@@ -103,8 +104,8 @@ message GetPlayerInfoRequest {
 }
 
 message GetPlayerInfoResponse {
-  PlayerInfo player_info = 1;
-  bool success = 2;
+  bool success = 1;
+  PlayerInfo player_info = 2;
 }
 
 message GetCurrentTasksRequest {
@@ -112,6 +113,23 @@ message GetCurrentTasksRequest {
 }
 
 message GetCurrentTasksResponse {
-  repeated PlayerTaskInfo current_task = 1;
-  bool success = 2;
+  bool success = 1;
+  repeated PlayerTaskInfo current_task = 2;
+}
+
+message SavePlayerTopicsRequest {
+  int64 player_id = 1;
+  repeated TaskTopic topic = 2;
+}
+
+message SavePlayerTopicsResponse {
+  bool success = 1;
+}
+
+message GenerateTasksRequest {
+  int64 player_id = 1;
+}
+
+message GenerateTasksResponse {
+  bool success = 1;
 }
