@@ -55,6 +55,7 @@ message LevelInfo {
   int32 total_experience = 3;
   int32 current_experience = 4;
   int32 experience_to_next_level = 5;
+  Assessment assessment = 6;
 }
 
 enum Assessment {
@@ -69,10 +70,7 @@ enum Assessment {
 message PlayerTaskTopicInfo {
   string id = 1;
   TaskTopic task_topic = 2;
-  Assessment assessment = 3;
-  int32 completed_tasks_count = 4;
-  int32 skipped_tasks_count = 5;
-  LevelInfo level_info = 6;
+  LevelInfo level_info = 3;
 }
 
 message PlayerInfo {
