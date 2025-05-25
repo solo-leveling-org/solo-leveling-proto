@@ -14,7 +14,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <protobuf.version>4.29.3</protobuf.version>
-    <grpc.version>1.70.0</grpc.version>
+    <grpc.version>1.72.0</grpc.version>
     <javax.version>1.3.2</javax.version>
     <lombok.version>1.18.38</lombok.version>
   </properties>
@@ -61,9 +61,9 @@
           <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
           <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+          <protoSourceRoot>${project.basedir}/src/main/proto</protoSourceRoot>
           <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
           <clearOutputDirectory>false</clearOutputDirectory>
-          <checkStaleness>true</checkStaleness>
         </configuration>
         <executions>
           <execution>
@@ -118,4 +118,12 @@
       </extension>
     </extensions>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/solo-leveling-org/solo-leveling-proto</url>
+    </repository>
+  </distributionManagement>
 </project>
