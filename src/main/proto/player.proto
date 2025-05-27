@@ -13,6 +13,8 @@ service PlayerService {
   rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
   rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (SavePlayerTopicsResponse);
   rpc GenerateTasks (GenerateTasksRequest) returns (GenerateTasksResponse);
+  rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
+  rpc SkipTask (SkipTaskRequest) returns (SkipTaskResponse);
 }
 
 // models
@@ -129,5 +131,21 @@ message GenerateTasksRequest {
 }
 
 message GenerateTasksResponse {
+  bool success = 1;
+}
+
+message CompleteTaskRequest {
+  string player_task_id = 1;
+}
+
+message CompleteTaskResponse {
+  bool success = 1;
+}
+
+message SkipTaskRequest {
+  string player_task_id = 1;
+}
+
+message SkipTaskResponse {
   bool success = 1;
 }
