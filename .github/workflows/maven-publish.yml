@@ -2,7 +2,7 @@ name: Publish package to GitHub Packages
 
 on:
   push:
-    branches: [ master ] # Измените на вашу основную ветку
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '24' # Укажите вашу версию Java
+          java-version: '24'
           distribution: 'temurin'
           cache: 'maven'
 
@@ -26,7 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Установите правильные настройки для Maven
           mkdir -p ~/.m2
           cat > ~/.m2/settings.xml <<EOF
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -43,5 +42,4 @@ jobs:
           </settings>
           EOF
           
-          # Соберите и опубликуйте артефакт
           mvn -B clean deploy
