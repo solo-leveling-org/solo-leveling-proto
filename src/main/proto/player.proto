@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.sleepkqq.sololeveling.proto.player;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option java_multiple_files = true;
 option java_package = "com.sleepkqq.sololeveling.proto.player";
@@ -11,10 +12,10 @@ option java_outer_classname = "PlayerProto";
 service PlayerService {
   rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
   rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
-  rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (SavePlayerTopicsResponse);
-  rpc GenerateTasks (GenerateTasksRequest) returns (GenerateTasksResponse);
-  rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
-  rpc SkipTask (SkipTaskRequest) returns (SkipTaskResponse);
+  rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
+  rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
+  rpc CompleteTask (CompleteTaskRequest) returns (google.protobuf.Empty);
+  rpc SkipTask (SkipTaskRequest) returns (google.protobuf.Empty);
 }
 
 // models
@@ -104,8 +105,7 @@ message GetPlayerInfoRequest {
 }
 
 message GetPlayerInfoResponse {
-  bool success = 1;
-  PlayerInfo player_info = 2;
+  PlayerInfo player_info = 1;
 }
 
 message GetCurrentTasksRequest {
@@ -113,8 +113,7 @@ message GetCurrentTasksRequest {
 }
 
 message GetCurrentTasksResponse {
-  bool success = 1;
-  repeated PlayerTaskInfo current_task = 2;
+  repeated PlayerTaskInfo current_task = 1;
 }
 
 message SavePlayerTopicsRequest {
@@ -122,30 +121,14 @@ message SavePlayerTopicsRequest {
   repeated TaskTopic topic = 2;
 }
 
-message SavePlayerTopicsResponse {
-  bool success = 1;
-}
-
 message GenerateTasksRequest {
   int64 player_id = 1;
-}
-
-message GenerateTasksResponse {
-  bool success = 1;
 }
 
 message CompleteTaskRequest {
   string player_task_id = 1;
 }
 
-message CompleteTaskResponse {
-  bool success = 1;
-}
-
 message SkipTaskRequest {
   string player_task_id = 1;
-}
-
-message SkipTaskResponse {
-  bool success = 1;
 }

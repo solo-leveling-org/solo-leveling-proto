@@ -2,13 +2,15 @@ syntax = "proto3";
 
 package com.sleepkqq.sololeveling.proto.user;
 
+import "google/protobuf/empty.proto";
+
 option java_multiple_files = true;
 option java_package = "com.sleepkqq.sololeveling.proto.user";
 option java_outer_classname = "UserProto";
 
 service UserService {
   rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
-  rpc AuthUser (AuthUserRequest) returns (AuthUserResponse);
+  rpc AuthUser (AuthUserRequest) returns (google.protobuf.Empty);
 }
 
 // models
@@ -33,14 +35,9 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
-  bool success = 1;
   UserInfo user_info = 2;
 }
 
 message AuthUserRequest {
   UserInfo user_info = 1;
-}
-
-message AuthUserResponse {
-  bool success = 1;
 }
