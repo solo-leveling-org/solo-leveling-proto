@@ -5,8 +5,8 @@ import io.grpc.ManagedChannelBuilder
 
 abstract class DefaultGrpcClientConfig {
 
-	fun createManagedChannel(host: String, port: Int): ManagedChannel =
-		ManagedChannelBuilder.forAddress(host, port)
+	fun createManagedChannel(properties: GrpcServiceProperties): ManagedChannel =
+		ManagedChannelBuilder.forAddress(properties.host, properties.port)
 			.usePlaintext()
 			.build()
 }
