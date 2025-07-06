@@ -3,11 +3,9 @@ package com.sleepkqq.sololeveling.proto.config
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 
-abstract class DefaultGrpcClientConfig(
-	private val host: String
-) {
+abstract class DefaultGrpcClientConfig {
 
-	fun createManagedChannel(port: Int): ManagedChannel =
+	fun createManagedChannel(host: String, port: Int): ManagedChannel =
 		ManagedChannelBuilder.forAddress(host, port)
 			.usePlaintext()
 			.build()
