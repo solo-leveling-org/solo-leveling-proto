@@ -21,12 +21,13 @@ enum UserRole {
 
 message UserInfo {
   int64 id = 1;
-  string username = 2;
-  string first_name = 3;
-  string last_name = 4;
-  string photo_url = 5;
-  string locale = 6;
-  repeated UserRole role = 7;
+  int32 version = 2;
+  string username = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string photo_url = 6;
+  string locale = 7;
+  repeated UserRole role = 8;
 }
 
 // requests and responses

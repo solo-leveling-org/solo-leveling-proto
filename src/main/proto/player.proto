@@ -12,7 +12,7 @@ option java_outer_classname = "PlayerProto";
 service PlayerService {
   rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
   rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
-  rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
+  rpc UpdatePlayerTopics (UpdatePlayerTopicsRequest) returns (google.protobuf.Empty);
   rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
   rpc CompleteTask (CompleteTaskRequest) returns (google.protobuf.Empty);
   rpc SkipTask (SkipTaskRequest) returns (google.protobuf.Empty);
@@ -42,23 +42,25 @@ enum TaskTopic {
 
 message TaskInfo {
   string id = 1;
-  string title = 2;
-  string description = 3;
-  int32 experience = 4;
-  TaskRarity rarity = 5;
-  repeated TaskTopic topic = 6;
-  int32 agility = 7;
-  int32 strength = 8;
-  int32 intelligence = 9;
+  int32 version = 2;
+  string title = 3;
+  string description = 4;
+  int32 experience = 5;
+  TaskRarity rarity = 6;
+  repeated TaskTopic topic = 7;
+  int32 agility = 8;
+  int32 strength = 9;
+  int32 intelligence = 10;
 }
 
 message LevelInfo {
   string id = 1;
-  int32 level = 2;
-  int32 total_experience = 3;
-  int32 current_experience = 4;
-  int32 experience_to_next_level = 5;
-  Assessment assessment = 6;
+  int32 version = 2;
+  int32 level = 3;
+  int32 total_experience = 4;
+  int32 current_experience = 5;
+  int32 experience_to_next_level = 6;
+  Assessment assessment = 7;
 }
 
 enum Assessment {
@@ -72,15 +74,17 @@ enum Assessment {
 
 message PlayerTaskTopicInfo {
   string id = 1;
-  TaskTopic task_topic = 2;
-  LevelInfo level_info = 3;
+  int32 version = 2;
+  TaskTopic task_topic = 3;
+  LevelInfo level_info = 4;
 }
 
 message PlayerInfo {
   int64 id = 1;
-  int32 max_tasks = 2;
-  LevelInfo level_info = 3;
-  repeated PlayerTaskTopicInfo player_task_topic_info = 4;
+  int32 version = 2;
+  int32 max_tasks = 3;
+  LevelInfo level_info = 4;
+  repeated PlayerTaskTopicInfo player_task_topic_info = 5;
 }
 
 enum PlayerTaskStatus {
@@ -93,10 +97,11 @@ enum PlayerTaskStatus {
 
 message PlayerTaskInfo {
   string id = 1;
-  TaskInfo task_info = 2;
-  PlayerTaskStatus status = 3;
-  google.protobuf.Timestamp created_at = 4;
-  google.protobuf.Timestamp closed_at = 5;
+  int32 version = 2;
+  TaskInfo task_info = 3;
+  PlayerTaskStatus status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp closed_at = 6;
 }
 
 // requests and responses
@@ -116,9 +121,10 @@ message GetCurrentTasksResponse {
   repeated PlayerTaskInfo current_task = 1;
 }
 
-message SavePlayerTopicsRequest {
+message UpdatePlayerTopicsRequest {
   int64 player_id = 1;
-  repeated TaskTopic topic = 2;
+  repeated TaskTopic append_topic = 2;
+  repeated TaskTopic remove_topic = 3;
 }
 
 message GenerateTasksRequest {
@@ -126,9 +132,9 @@ message GenerateTasksRequest {
 }
 
 message CompleteTaskRequest {
-  string player_task_id = 1;
+  PlayerTaskInfo player_task_info = 1;
 }
 
 message SkipTaskRequest {
-  string player_task_id = 1;
+  PlayerTaskInfo player_task_info = 1;
 }
