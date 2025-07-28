@@ -27,7 +27,7 @@ message UserInfo {
   string last_name = 5;
   string photo_url = 6;
   string locale = 7;
-  repeated UserRole role = 8;
+  repeated UserRole roles = 8;
 }
 
 // requests and responses

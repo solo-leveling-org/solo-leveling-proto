@@ -47,7 +47,7 @@ message TaskInfo {
   string description = 4;
   int32 experience = 5;
   TaskRarity rarity = 6;
-  repeated TaskTopic topic = 7;
+  repeated TaskTopic topics = 7;
   int32 agility = 8;
   int32 strength = 9;
   int32 intelligence = 10;
@@ -84,7 +84,7 @@ message PlayerInfo {
   int32 version = 2;
   int32 max_tasks = 3;
   LevelInfo level_info = 4;
-  repeated PlayerTaskTopicInfo player_task_topic_info = 5;
+  repeated PlayerTaskTopicInfo player_task_topic_infos = 5;
 }
 
 enum PlayerTaskStatus {
@@ -118,7 +118,7 @@ message GetActiveTasksRequest {
 }
 
 message GetActiveTasksResponse {
-  repeated PlayerTaskInfo active_task = 1;
+  repeated PlayerTaskInfo active_tasks = 1;
   bool first_time = 2;
 }
 
