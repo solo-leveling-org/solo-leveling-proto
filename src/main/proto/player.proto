@@ -124,8 +124,7 @@ message GetActiveTasksResponse {
 
 message SavePlayerTopicsRequest {
   int64 player_id = 1;
-  repeated TaskTopic append_topic = 2;
-  repeated TaskTopic remove_topic = 3;
+  repeated TaskTopic topics = 2;
 }
 
 message SavePlayerTopicsResponse {
