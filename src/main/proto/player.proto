@@ -11,7 +11,7 @@ option java_outer_classname = "PlayerProto";
 
 service PlayerService {
   rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
-  rpc GetCurrentTasks (GetCurrentTasksRequest) returns (GetCurrentTasksResponse);
+  rpc GetActiveTasks (GetActiveTasksRequest) returns (GetActiveTasksResponse);
   rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
   rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
   rpc CompleteTask (CompleteTaskRequest) returns (google.protobuf.Empty);
@@ -113,18 +113,23 @@ message GetPlayerInfoResponse {
   PlayerInfo player_info = 1;
 }
 
-message GetCurrentTasksRequest {
+message GetActiveTasksRequest {
   int64 player_id = 1;
 }
 
-message GetCurrentTasksResponse {
-  repeated PlayerTaskInfo current_task = 1;
+message GetActiveTasksResponse {
+  repeated PlayerTaskInfo active_task = 1;
+  bool first_time = 2;
 }
 
 message SavePlayerTopicsRequest {
   int64 player_id = 1;
   repeated TaskTopic append_topic = 2;
   repeated TaskTopic remove_topic = 3;
+}
+
+message SavePlayerTopicsResponse {
+  bool first_time = 1;
 }
 
 message GenerateTasksRequest {
