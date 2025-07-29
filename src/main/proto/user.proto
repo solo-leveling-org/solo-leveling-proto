@@ -49,9 +49,9 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
-  UserView user_info = 2;
+  UserView user = 2;
 }
 
 message AuthUserRequest {
-  UserInput user_info = 1;
+  UserInput user = 1;
 }
