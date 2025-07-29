@@ -41,7 +41,7 @@ enum TaskTopic {
   TEAMWORK = 9;
 }
 
-message TaskInfo {
+message TaskView {
   string id = 1;
   int32 version = 2;
   string title = 3;
@@ -54,7 +54,7 @@ message TaskInfo {
   int32 intelligence = 10;
 }
 
-message LevelInfo {
+message LevelView {
   string id = 1;
   int32 version = 2;
   int32 level = 3;
@@ -73,18 +73,18 @@ enum Assessment {
   E = 5;
 }
 
-message PlayerTaskTopicInfo {
+message PlayerTaskTopicView {
   string id = 1;
   int32 version = 2;
   TaskTopic task_topic = 3;
-  LevelInfo level_info = 4;
+  LevelView level = 4;
 }
 
-message PlayerInfo {
+message PlayerView {
   int64 id = 1;
   int32 version = 2;
   int32 max_tasks = 3;
-  LevelInfo level_info = 4;
+  LevelView level = 4;
 }
 
 enum PlayerTaskStatus {
@@ -95,13 +95,17 @@ enum PlayerTaskStatus {
   SKIPPED = 4;
 }
 
-message PlayerTaskInfo {
+message PlayerTaskInput {
   string id = 1;
   int32 version = 2;
-  TaskInfo task_info = 3;
+  PlayerTaskStatus status = 3;
+}
+
+message PlayerTaskView {
+  string id = 1;
+  int32 version = 2;
+  TaskView task = 3;
   PlayerTaskStatus status = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp closed_at = 6;
 }
 
 // requests and responses
@@ -110,7 +114,7 @@ message GetPlayerInfoRequest {
 }
 
 message GetPlayerInfoResponse {
-  PlayerInfo player_info = 1;
+  PlayerView player = 1;
 }
 
 message GetActiveTasksRequest {
@@ -118,7 +122,7 @@ message GetActiveTasksRequest {
 }
 
 message GetActiveTasksResponse {
-  repeated PlayerTaskInfo active_tasks = 1;
+  repeated PlayerTaskView tasks = 1;
   bool first_time = 2;
 }
 
@@ -136,7 +140,7 @@ message GetPlayerTopicsRequest {
 }
 
 message GetPlayerTopicsResponse {
-  repeated PlayerTaskTopicInfo player_task_topic_infos = 1;
+  repeated PlayerTaskTopicView player_task_topics = 1;
 }
 
 message GenerateTasksRequest {
@@ -144,9 +148,9 @@ message GenerateTasksRequest {
 }
 
 message CompleteTaskRequest {
-  PlayerTaskInfo player_task_info = 1;
+  PlayerTaskInput player_task = 1;
 }
 
 message SkipTaskRequest {
-  PlayerTaskInfo player_task_info = 1;
+  PlayerTaskInput player_task = 1;
 }
