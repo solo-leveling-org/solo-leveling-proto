@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.sleepkqq.sololeveling.proto.user;
 
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 option java_multiple_files = true;
@@ -28,6 +29,7 @@ message UserInfo {
   string photo_url = 6;
   string locale = 7;
   repeated UserRole roles = 8;
+  google.protobuf.Timestamp created_at = 9;
 }
 
 // requests and responses

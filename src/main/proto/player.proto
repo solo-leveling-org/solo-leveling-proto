@@ -13,6 +13,7 @@ service PlayerService {
   rpc GetPlayerInfo (GetPlayerInfoRequest) returns (GetPlayerInfoResponse);
   rpc GetActiveTasks (GetActiveTasksRequest) returns (GetActiveTasksResponse);
   rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
+  rpc GetPlayerTopics (GetPlayerTopicsRequest) returns (GetPlayerTopicsResponse);
   rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
   rpc CompleteTask (CompleteTaskRequest) returns (google.protobuf.Empty);
   rpc SkipTask (SkipTaskRequest) returns (google.protobuf.Empty);
@@ -84,7 +85,6 @@ message PlayerInfo {
   int32 version = 2;
   int32 max_tasks = 3;
   LevelInfo level_info = 4;
-  repeated PlayerTaskTopicInfo player_task_topic_infos = 5;
 }
 
 enum PlayerTaskStatus {
@@ -129,6 +129,14 @@ message SavePlayerTopicsRequest {
 
 message SavePlayerTopicsResponse {
   bool first_time = 1;
+}
+
+message GetPlayerTopicsRequest {
+  int64 player_id = 1;
+}
+
+message GetPlayerTopicsResponse {
+  repeated PlayerTaskTopicInfo player_task_topic_infos = 1;
 }
 
 message GenerateTasksRequest {
