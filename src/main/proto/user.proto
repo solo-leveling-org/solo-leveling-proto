@@ -9,7 +9,7 @@ option java_package = "com.sleepkqq.sololeveling.proto.user";
 option java_outer_classname = "UserProto";
 
 service UserService {
-  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc AuthUser (AuthUserRequest) returns (google.protobuf.Empty);
 }
 
@@ -41,11 +41,11 @@ message UserView {
 }
 
 // requests and responses
-message GetUserInfoRequest {
+message GetUserRequest {
   int64 user_id = 1;
 }
 
-message GetUserInfoResponse {
+message GetUserResponse {
   UserView user = 2;
 }
 
