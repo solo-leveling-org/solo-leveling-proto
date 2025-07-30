@@ -79,11 +79,18 @@ message PlayerTaskTopicView {
   LevelView level = 4;
 }
 
+message PlayerBalanceView {
+  string id = 1;
+  int32 version = 2;
+  string balance = 3;
+}
+
 message PlayerView {
   int64 id = 1;
   int32 version = 2;
   int32 max_tasks = 3;
   LevelView level = 4;
+  PlayerBalanceView balance = 5;
 }
 
 enum PlayerTaskStatus {
