@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.sleepkqq.sololeveling.proto.user;
 
 import "google/protobuf/empty.proto";
+import "player.proto";
 
 option java_multiple_files = true;
 option java_package = "com.sleepkqq.sololeveling.proto.user";
@@ -38,6 +39,7 @@ message UserView {
   string photo_url = 6;
   string locale = 7;
   repeated UserRole roles = 8;
+  com.sleepkqq.sololeveling.proto.player.PlayerView player = 9;
 }
 
 // requests and responses
@@ -46,7 +48,7 @@ message GetUserRequest {
 }
 
 message GetUserResponse {
-  UserView user = 2;
+  UserView user = 1;
 }
 
 message AuthUserRequest {
