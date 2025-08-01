@@ -10,7 +10,6 @@ option java_package = "com.sleepkqq.sololeveling.proto.player";
 option java_outer_classname = "PlayerProto";
 
 service PlayerService {
-  rpc GetPlayer (GetPlayerRequest) returns (GetPlayerResponse);
   rpc GetActiveTasks (GetActiveTasksRequest) returns (GetActiveTasksResponse);
   rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
   rpc GetPlayerTopics (GetPlayerTopicsRequest) returns (GetPlayerTopicsResponse);
@@ -116,14 +115,6 @@ message PlayerTaskView {
 }
 
 // requests and responses
-message GetPlayerRequest {
-  int64 player_id = 1;
-}
-
-message GetPlayerResponse {
-  PlayerView player = 1;
-}
-
 message GetActiveTasksRequest {
   int64 player_id = 1;
 }
