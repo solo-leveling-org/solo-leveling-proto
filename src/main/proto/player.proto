@@ -147,7 +147,8 @@ message GenerateTasksRequest {
 }
 
 message CompleteTaskRequest {
-  PlayerTaskInput player_task = 1;
+  int64 player_id = 1;
+  PlayerTaskInput player_task = 2;
 }
 
 message SkipTaskRequest {
