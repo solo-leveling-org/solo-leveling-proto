@@ -54,6 +54,20 @@ message TaskView {
   int32 intelligence = 11;
 }
 
+message TaskInput {
+  string id = 1;
+  int32 version = 2;
+  string title = 3;
+  string description = 4;
+  int32 experience = 5;
+  int32 currency_reward = 6;
+  TaskRarity rarity = 7;
+  repeated TaskTopic topics = 8;
+  int32 agility = 9;
+  int32 strength = 10;
+  int32 intelligence = 11;
+}
+
 message LevelView {
   string id = 1;
   int32 version = 2;
@@ -105,7 +119,7 @@ enum PlayerTaskStatus {
 message PlayerTaskInput {
   string id = 1;
   int32 version = 2;
-  TaskView task = 3;
+  TaskInput task = 3;
   PlayerTaskStatus status = 4;
 }
 
