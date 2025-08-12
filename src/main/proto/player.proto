@@ -105,7 +105,8 @@ enum PlayerTaskStatus {
 message PlayerTaskInput {
   string id = 1;
   int32 version = 2;
-  PlayerTaskStatus status = 3;
+  TaskView task = 3;
+  PlayerTaskStatus status = 4;
 }
 
 message PlayerTaskView {
