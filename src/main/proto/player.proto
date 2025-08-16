@@ -14,7 +14,7 @@ service PlayerService {
   rpc SavePlayerTopics (SavePlayerTopicsRequest) returns (google.protobuf.Empty);
   rpc GetPlayerTopics (GetPlayerTopicsRequest) returns (GetPlayerTopicsResponse);
   rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
-  rpc CompleteTask (CompleteTaskRequest) returns (google.protobuf.Empty);
+  rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
   rpc SkipTask (SkipTaskRequest) returns (google.protobuf.Empty);
 }
 
