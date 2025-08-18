@@ -6,7 +6,7 @@
 
   <groupId>com.sleepkqq</groupId>
   <artifactId>solo-leveling-proto</artifactId>
-  <version>4.3.2</version>
+  <version>4.3.3</version>
 
   <properties>
     <java.version>24</java.version>
