@@ -79,6 +79,16 @@ message LevelView {
   Assessment assessment = 7;
 }
 
+message LevelInput {
+  string id = 1;
+  int32 version = 2;
+  int32 level = 3;
+  int32 total_experience = 4;
+  int32 current_experience = 5;
+  int32 experience_to_next_level = 6;
+  Assessment assessment = 7;
+}
+
 enum Assessment {
   S = 0;
   A = 1;
@@ -94,6 +104,14 @@ message PlayerTaskTopicView {
   bool is_active = 3;
   TaskTopic task_topic = 4;
   LevelView level = 5;
+}
+
+message PlayerTaskTopicInput {
+  string id = 1;
+  int32 version = 2;
+  bool is_active = 3;
+  TaskTopic task_topic = 4;
+  LevelInput level = 5;
 }
 
 message PlayerBalanceView {
@@ -151,7 +169,7 @@ message GetActiveTasksResponse {
 
 message SavePlayerTopicsRequest {
   int64 player_id = 1;
-  repeated TaskTopic topics = 2;
+  repeated PlayerTaskTopicInput player_task_topics = 2;
 }
 
 message SavePlayerTopicsResponse {
