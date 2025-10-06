@@ -12,7 +12,7 @@ import java.util.Locale
 import kotlin.text.isNullOrBlank
 
 @Suppress("unused")
-class LocaleGrpcInterceptor : ServerInterceptor {
+class LocaleServerInterceptor : ServerInterceptor {
 
 	override fun <ReqT, RespT> interceptCall(
 		call: ServerCall<ReqT, RespT>,
