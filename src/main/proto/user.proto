@@ -12,6 +12,8 @@ option java_outer_classname = "UserProto";
 service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc AuthUser (AuthUserRequest) returns (google.protobuf.Empty);
+  rpc GetUserLocale(GetUserLocaleRequest) returns (GetUserLocaleResponse);
+  rpc UpdateUserLocale(UpdateUserLocaleRequest) returns (google.protobuf.Empty);
 }
 
 // models
@@ -53,4 +55,17 @@ message GetUserResponse {
 
 message AuthUserRequest {
   UserInput user = 1;
+}
+
+message GetUserLocaleRequest {
+  int64 user_id = 1;
+}
+
+message GetUserLocaleResponse {
+  string locale = 1;
+}
+
+message UpdateUserLocaleRequest {
+  int64 user_id = 1;
+  string locale = 2;
 }
