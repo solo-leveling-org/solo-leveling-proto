@@ -63,6 +63,7 @@ message GetUserLocaleRequest {
 
 message GetUserLocaleResponse {
   string locale = 1;
+  bool is_manual = 2;
 }
 
 message UpdateUserLocaleRequest {
