@@ -17,6 +17,7 @@ service PlayerService {
   rpc GenerateTasks (GenerateTasksRequest) returns (google.protobuf.Empty);
   rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
   rpc SkipTask (SkipTaskRequest) returns (google.protobuf.Empty);
+  rpc GetPlayerBalanceTransactions (GetPlayerBalanceTransactionsRequest) returns (GetPlayerBalanceTransactionsResponse);
 }
 
 // models
@@ -132,6 +133,26 @@ message PlayerView {
   repeated PlayerTaskTopicView task_topics = 9;
 }
 
+message PlayerBalanceTransactionView {
+  string id = 1;
+  int32 version = 2;
+  google.type.Money amount = 3;
+  PlayerBalanceTransactionType type = 4;
+  PlayerBalanceTransactionCause cause = 5;
+}
+
+enum PlayerBalanceTransactionType {
+  IN = 0;
+  OUT = 1;
+}
+
+enum PlayerBalanceTransactionCause {
+  TASK_COMPLETION = 0;
+  LEVEL_UP = 1;
+  DAILY_CHECK_IN = 2;
+  ITEM_PURCHASE = 3;
+}
+
 enum PlayerTaskStatus {
   PREPARING = 0;
   IN_PROGRESS = 1;
@@ -155,6 +176,36 @@ message PlayerTaskView {
   PlayerTaskStatus status = 4;
   google.protobuf.Timestamp closed_at = 5;
   TaskView task = 6;
+}
+
+message DateFilter {
+  string field = 1;
+  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp to = 3;
+}
+
+message ValueFilter {
+  string field = 1;
+  repeated string values = 2;
+}
+
+message Sort {
+  string field = 1;
+  OrderMode mode = 2;
+}
+
+enum OrderMode {
+  ASC = 0;
+  DESC = 1;
+}
+
+message PaginationInfo {
+  int32 current_page = 1;
+  int32 total_pages = 2;
+  int64 total_items = 3;
+  int32 page_size = 4;
+  bool has_next = 5;
+  bool has_previous = 6;
 }
 
 // requests and responses
@@ -201,4 +252,18 @@ message CompleteTaskResponse {
 message SkipTaskRequest {
   int64 player_id = 1;
   PlayerTaskInput player_task = 2;
+}
+
+message GetPlayerBalanceTransactionsRequest {
+  int64 player_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  repeated DateFilter date_filters = 4;
+  repeated ValueFilter value_filters = 5;
+  repeated Sort sorts = 6;
+}
+
+message GetPlayerBalanceTransactionsResponse {
+  repeated PlayerBalanceTransactionView transactions = 1;
+  PaginationInfo pagination = 2;
 }
