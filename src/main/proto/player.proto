@@ -184,7 +184,7 @@ message DateFilter {
   google.protobuf.Timestamp to = 3;
 }
 
-message ValueFilter {
+message StringFilter {
   string field = 1;
   repeated string values = 2;
 }
@@ -197,6 +197,16 @@ message Sort {
 enum OrderMode {
   ASC = 0;
   DESC = 1;
+}
+
+message Filter {
+  repeated DateFilter date_filters = 1;
+  repeated StringFilter string_filters = 2;
+}
+
+message QueryOptions {
+  Filter filter = 1;
+  repeated Sort sorts = 2;
 }
 
 message PaginationInfo {
@@ -258,9 +268,7 @@ message GetPlayerBalanceTransactionsRequest {
   int64 player_id = 1;
   int32 page = 2;
   int32 page_size = 3;
-  repeated DateFilter date_filters = 4;
-  repeated ValueFilter value_filters = 5;
-  repeated Sort sorts = 6;
+  QueryOptions options = 4;
 }
 
 message GetPlayerBalanceTransactionsResponse {
